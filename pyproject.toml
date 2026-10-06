@@ -4,31 +4,40 @@ build-backend = "hatchling.build"
 
 [project]
 name = "evo-lang"
-version = "0.2.0"
-description = "Simulação Evolutiva Linguística (Latim-Românicas)"
+version = "0.3.0"
+description = "Evolve Latin words into a synthetic Neo-Romance vocabulary with a genetic algorithm"
 readme = "README.md"
+license = "MIT"
+authors = [{ name = "Filipe Carmo" }]
 requires-python = ">=3.10"
+keywords = ["genetic-algorithm", "historical-linguistics", "nlp", "latin", "romance-languages"]
 dependencies = [
-    "numpy>=1.24.0",
-    "pandas>=2.0.0",
-    "scikit-learn>=1.2.0",
-    "transformers>=4.30.0",
-    "torch>=2.0.0",
-    "sentence-transformers>=2.2.0",
-    "python-dotenv>=1.0.0",
-    "requests>=2.31.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "python-dotenv>=1.0",
+    "requests>=2.31",
 ]
 
 [project.optional-dependencies]
-dev = [
-    "pytest>=8.0.0",
-    "ruff>=0.3.0",
-]
+# Real sentence embeddings for semantic drift (pulls in torch). Without it, a hash embedder is used.
+semantic = ["sentence-transformers>=2.2"]
+dev = ["pytest>=8.0", "ruff>=0.3"]
+
+[project.scripts]
+evo-lang = "evo_lang.cli:main"
+
+[project.urls]
+Repository = "https://github.com/filipe-carmo/evo-lang"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/evo_lang"]
 
 [tool.ruff]
-line-length = 100
+line-length = 120
 target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["src"]

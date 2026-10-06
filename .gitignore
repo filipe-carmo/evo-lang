@@ -122,6 +122,5 @@ cython_debug/
 .gemini/
 
 # Data and large files
-data/lexicon.csv
 *.csv
-!data/neo_romance_dict.json
+!data/lexicon.csv
